@@ -30,12 +30,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,15 +58,19 @@ WSGI_APPLICATION = 'cms.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',                               # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'cms',                                                      # Or path to database file if using sqlite3.
+        'USER': 'root',                                                     # Not used with sqlite3.
+        'PASSWORD': 'postbus10',                                            # Not used with sqlite3.
+        'HOST': '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                                                         # Set to empty string for default. Not used with sqlite3.
     }
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'nl-be'
 
 TIME_ZONE = 'UTC'
 
