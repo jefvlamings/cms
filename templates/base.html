@@ -1,0 +1,45 @@
+<html>
+
+    {# Page Title #}
+    <title>{% block title %}Jef Vlamings{% endblock %}</title>
+
+    <head>
+
+        {# Static files #}
+        {% load staticfiles %}
+
+        {# Stylesheets #}
+        <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
+
+        {# Javascript #}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="{% static "js/script.js" %}"></script>
+
+    </head>
+
+    <body>
+
+        {# Header #}
+       <header>
+           Header
+           <nav>
+               <ul>
+                   <li>nav</li>
+               </ul>
+           </nav>
+       </header>
+
+        {# Content goes here #}
+        <div id="content">
+            {% block content %}
+            {% endblock content %}
+        </div>
+
+        {# Footer #}
+        <footer>
+            Footer
+        </footer>
+
+    </body>
+
+</html>

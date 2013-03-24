@@ -1,7 +1,34 @@
-<h1>Overview</h1>
+{# Extend from base.html #}
+{% extends "base.html" %}
 
-<ol>
-{% for page in all_pages %}
-    <li><a href="{{ page.path }}">{{ page.title }}</a></li>
-{% endfor %}
-</ol>
+{# Set Page title #}
+{% block title %}Home - Jef Vlamings{% endblock %}
+
+{# Content #}
+{% block content %}
+
+    {# Title #}
+    <h1>Home</h1>
+
+    {# Recursive menu #}
+    <ul>
+        {% for page in root_pages %}
+            {% for branch, obj in page.as_tree %}
+                {% if obj %}
+                    <li>
+                        <a href="/{{ obj.path }}">{{ obj.title }}</a>
+                        {% if branch %}
+                            <ul>
+                        {% else %}
+                            </li>
+                        {% endif %}
+                {% else %}
+                    {% if branch %}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+{% endblock %}
