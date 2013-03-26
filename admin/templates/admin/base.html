@@ -1,0 +1,44 @@
+<!doctype html>
+
+    {# IE shizzle #}
+    <!--[if lt IE 9]><html class="ie"><![endif]-->
+    <!--[if gte IE 9]><!--><html><!--<![endif]-->
+
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        {# Title #}
+        <title>{% block title %}Admin{% endblock %}</title>
+
+        {# Stylesheets #}
+        <link href="{{ STATIC_URL }}admin/css/style.css" rel="stylesheet" type="text/css" />
+
+        {# Javascript #}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}admin/js/script.js"></script>
+
+        <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    </head>
+
+    <body lang="en">
+
+        <header>
+            <div class="container">
+                <h1>Admin</h1>
+                <h2>This should be responsive and all</h2>
+            </div>
+        </header>
+
+        {# Content goes here #}
+        <div id="content" class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+
+    </body>
+
+</html>
+
