@@ -1,0 +1,31 @@
+{# Extend from base.html #}
+{% extends "admin/base.html" %}
+
+{# Set Page title #}
+{% block title %}Edit - {{ page.title }}{% endblock %}
+
+{# Content #}
+{% block content %}
+
+    <h2>{{ page.title }}</h2>
+    <p>{{ page.text }}</p>
+
+    <form action="/admin/edit/{{ page.id }}" method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="field-row">
+            {{ form.title.errors }}
+            {{ form.title }}
+        </div>
+
+        <div class="field-row">
+            {{ form.text.errors }}
+            {{ form.text }}
+        </div>
+
+        <input type="submit" value="Opslaan" />
+
+    </form>
+
+{% endblock %}

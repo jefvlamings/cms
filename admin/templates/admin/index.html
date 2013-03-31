@@ -7,25 +7,7 @@
 {# Content #}
 {% block content %}
 
-    {# Recursive menu #}
-    <ul id="page-tree">
-        {% for page in root_pages %}
-            {% for branch, obj in page.as_tree %}
-                {% if obj %}
-                    <li>
-                        <a href="/{{ obj.path }}">{{ obj.title }}</a>
-                        {% if branch %}
-                            <ul>
-                                {% else %}
-                            </li>
-                        {% endif %}
-                {% else %}
-                    {% if branch %}
-                        </ul>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-    </ul>
+    <h2>Index</h2>
+    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
 
 {% endblock %}

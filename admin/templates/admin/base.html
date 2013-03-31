@@ -28,14 +28,46 @@
         <header>
             <div class="container">
                 <h1>Admin</h1>
-                <h2>This should be responsive and all</h2>
             </div>
         </header>
 
         {# Content goes here #}
         <div id="content" class="container">
-            {% block content %}
-            {% endblock content %}
+
+            <div class="row-fluid">
+
+                {# Recursive menu #}
+                <div class="span3">
+                    <h2>Pages</h2>
+                    <ul id="page-tree">
+                        {% for page in root_pages %}
+                            {% for branch, obj in page.as_tree %}
+                                {% if obj %}
+                                    <li>
+                                        <a href="/admin/edit/{{ obj.id }}">{{ obj.title }}</a>
+                                        {% if branch %}
+                                            <ul>
+                                                {% else %}
+                                            </li>
+                                        {% endif %}
+                                {% else %}
+                                    {% if branch %}
+                                        </ul>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {# Right Column #}
+                <div class="span9">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+
+            </div>
+
         </div>
 
     </body>
