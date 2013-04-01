@@ -1,4 +1,52 @@
 @import "boostrap";
+@import "mixins";
+
+@font-face {
+    font-family: 'Pictos';
+    src: url('pictos/pictos-web.eot');
+    src: local('☺'), url('pictos/pictos-web.woff') format('woff'), url('pictos/pictos-web.ttf') format('truetype'), url('pictos/pictos-web.svg#webfontIyfZbseF') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.icon{
+    font-family: 'pictos';
+}
+
+.publish-button{
+    display: block;
+    padding: 15px 10px 15px 10px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    color:  #fff;
+    background: @green;
+    box-shadow: 0px 1px 1px darken(@green, 20%);
+    &:hover{
+        background: lighten(@green, 10%);
+    }
+    &:active{
+        background: darken(@green, 20%);
+    }
+    &.published{
+        color:  #ccc;
+        background: #f5f5f5;
+        box-shadow: 0px -1px 1px #ddd;
+        border: 1px solid #eaeaea;
+        &:hover{
+            background: #f8f8f8;
+        }
+        &:active{
+            background: #f0f0f0;
+        }
+    }
+    .icon{
+        font-size: 20px;
+        margin-left: 10%;
+        float:left;
+    }
+}
 
 html{
     font-family: "helvetica neue";
@@ -10,8 +58,38 @@ body{
 }
 
 header{
-    background:  #000;
+    background:  #444;
+    border-bottom:  2px solid #fff;
     color: #ffffff;
+}
+
+#content{
+}
+
+.messages{
+    list-style-type: none;
+    padding: 0;
+    li{
+        padding: 10px;
+        border-radius: 4px;
+        color: #ffffff;
+    }
+    .success{
+        background: @green;
+        .button-shadow(@green);
+    }
+    .error{
+        background: @red;
+        .button-shadow(@red);
+    }
+    .warning{
+        background: @yellow;
+        .button-shadow(@yellow);
+    }
+    .info, .debug{
+        background: @blue;
+        .button-shadow(@blue);
+    }
 }
 
 #page-tree{
@@ -27,6 +105,10 @@ header{
         }
         a:hover{
             background:  #f2f2f2;
+
+        }
+        a:hover > .delete{
+            visibility: visible;
         }
         ul li a:before{
             content: '';
@@ -39,42 +121,77 @@ header{
             border-left: 1px solid #cccccc;
         }
     }
+    .icon{
+        display: inline-block;
+        color: #cccccc;
+        font-size: 20px;
+        &:hover{
+            color: #333333;
+        }
+    }
+    .delete{
+        float: right;
+        visibility: hidden;
+    }
+    .add{
+        margin-right: 10px;
+    }
 }
 
 form{
-    label{
-        display: inline-block;
-        width: 20%;
+    input{
+        font-family: "helvetica neue";
     }
-    input[type="text"],input[type="number"],textarea{
+    input, textarea, select{
+        width: 100%;
         border: 1px solid #eaeaea;
-        padding:  15px 10px 15px 10px;
+        padding: 15px 10px 15px 10px;
         border-radius: 4px;
         background: #fdfdfd;
+        -webkit-appearance: none;
+        -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+        box-sizing: border-box;         /* Opera/IE 8+ */
+        color: #888888;
         &:focus{
             outline:  none;
             background:  #ffffff;
             border:  1px solid #42b1ff;
+            color: #000000;
         }
     }
-    input[type="text"],textarea{
-        width:  70%;
+    input[type="date"], select{
+        padding: 10px;
     }
     input[type="submit"]{
         border:  none;
         padding:  15px 25px 15px 25px;
-        background: #2f96b4;
+        background: @blue;
         color: #fff;
-        box-shadow: 0px 1px 1px darken(#2f96b4, 20%);
+        border-radius: 4px;
+        .button-shadow(@blue);
         &:hover{
-            background: lighten(#2f96b4, 20%);
+            background: lighten(@blue, 10%);
         }
         &:active{
-            box-shadow: 0px 1px 1px darken(#2f96b4, 50%);
-            background: darken(#2f96b4, 20%);
+            box-shadow: 0px 1px 1px darken(@blue, 50%);
+            background: darken(@blue, 10%);
         }
     }
-    .field-row{
-        margin: 20px 0px 20px 0px;
+    .errorlist{
+        border-radius:  4px;
+        color: #fff;
+        background: @red;
+        list-style-type: none;
+        padding:  10px;
+    }
+}
+.field-row{
+    margin: 20px 0px 20px 0px;
+
+    label{
+        color: #666;
+        display: block;
+        line-height: 200%;
     }
 }

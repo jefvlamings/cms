@@ -12,6 +12,9 @@
         {# Title #}
         <title>{% block title %}Admin{% endblock %}</title>
 
+        {# Favicon #}
+        <link rel="icon" type="image/png" href="{{ STATIC_URL }}admin/favicon.ico">
+
         {# Stylesheets #}
         <link href="{{ STATIC_URL }}admin/css/style.css" rel="stylesheet" type="text/css" />
 
@@ -38,13 +41,15 @@
 
                 {# Recursive menu #}
                 <div class="span3">
-                    <h2>Pages</h2>
+                    <h2>Pagina's</h2>
                     <ul id="page-tree">
                         {% for page in root_pages %}
                             {% for branch, obj in page.as_tree %}
                                 {% if obj %}
-                                    <li>
-                                        <a href="/admin/edit/{{ obj.id }}">{{ obj.title }}</a>
+                                    <li id="{{ obj.id }}">
+                                        <a href="/admin/edit/{{ obj.id }}">{{ obj.title }}
+                                            <span class="icon delete">*</span>
+                                        </a>
                                         {% if branch %}
                                             <ul>
                                                 {% else %}
@@ -57,11 +62,28 @@
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
+                        <li>
+                            <a href="/admin/new" title="Pagina toevoegen">
+                                <span class="icon add">&</span>
+                                Pagina toevoegen
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
                 {# Right Column #}
                 <div class="span9">
+
+                    {# Messages #}
+                    <ul class="messages">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    {% endif %}
+                    </ul>
+
+                    {# Content #}
                     {% block content %}
                     {% endblock content %}
                 </div>

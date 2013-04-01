@@ -2,29 +2,79 @@
 {% extends "admin/base.html" %}
 
 {# Set Page title #}
-{% block title %}Edit - {{ page.title }}{% endblock %}
+{% block title %}Bewerk - {{ page.title }}{% endblock %}
 
 {# Content #}
 {% block content %}
 
-    <h2>{{ page.title }}</h2>
-    <p>{{ page.text }}</p>
+    <h2>Bewerk</h2>
 
-    <form action="/admin/edit/{{ page.id }}" method="post">
+    {% if page.id %}
+    <form id="{{ page.id }}" action="/admin/edit/{{ page.id }}" method="post">
+    {% else %}
+    <form action="/admin/new" method="post">
+    {% endif %}
+
         {% csrf_token %}
         {{ form.non_field_errors }}
+        <div class="row-fluid">
 
-        <div class="field-row">
-            {{ form.title.errors }}
-            {{ form.title }}
+
+            <div class="span9">
+
+                <div class="field-row">
+                    {{ form.title.errors }}
+                    {{ form.title }}
+                </div>
+
+                <div class="field-row">
+                    {{ form.text.errors }}
+                    {{ form.text }}
+                </div>
+
+            </div>
+
+            <div class="span3">
+
+                <div class="field-row">
+                    <a href="test" class="publish-button
+                        {% if page.published == 1 %}
+                            published">
+                        <span class="icon delete">3</span>
+                        Gepubliceerd
+                    {% else %}
+                        ">
+                        <span class="icon delete">E</span>
+                        Publiceer
+                    {% endif %}
+                    </a>
+                </div>
+
+                <div class="field-row">
+                    {{ form.parent.errors }}
+                    <label for="id_parent">Gekoppeld aan</label>
+                    {{ form.parent }}
+                </div>
+
+                <div class="field-row">
+                    {{ form.date_added.errors }}
+                    <label for="id_date_added">Aangemaakt op</label>
+                    {{ form.date_added }}
+                </div>
+
+                <div class="field-row">
+                    {{ form.date_published.errors }}
+                    <label for="id_date_published">Laatst bewerkt</label>
+                    {{ form.date_published }}
+                </div>
+
+
+
+                <input type="submit" value="Opslaan" />
+
+            </div>
+
         </div>
-
-        <div class="field-row">
-            {{ form.text.errors }}
-            {{ form.text }}
-        </div>
-
-        <input type="submit" value="Opslaan" />
 
     </form>
 

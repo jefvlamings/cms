@@ -1561,6 +1561,49 @@ textarea {
     overflow: visible !important;
   }
 }
+@font-face {
+  font-family: 'Pictos';
+  src: url('pictos/pictos-web.eot');
+  src: local('☺'), url('pictos/pictos-web.woff') format('woff'), url('pictos/pictos-web.ttf') format('truetype'), url('pictos/pictos-web.svg#webfontIyfZbseF') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon {
+  font-family: 'pictos';
+}
+.publish-button {
+  display: block;
+  padding: 15px 10px 15px 10px;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background: #acd298;
+  box-shadow: 0px 1px 1px #73b351;
+}
+.publish-button:hover {
+  background: #c9e2bb;
+}
+.publish-button:active {
+  background: #73b351;
+}
+.publish-button.published {
+  color: #ccc;
+  background: #f5f5f5;
+  box-shadow: 0px -1px 1px #dddddd;
+  border: 1px solid #eaeaea;
+}
+.publish-button.published:hover {
+  background: #f8f8f8;
+}
+.publish-button.published:active {
+  background: #f0f0f0;
+}
+.publish-button .icon {
+  font-size: 20px;
+  margin-left: 10%;
+  float: left;
+}
 html {
   font-family: "helvetica neue";
   background: #fafafa;
@@ -1569,8 +1612,43 @@ body {
   margin: 0;
 }
 header {
-  background: #000;
+  background: #444;
+  border-bottom: 2px solid #fff;
   color: #ffffff;
+}
+.messages {
+  list-style-type: none;
+  padding: 0;
+}
+.messages li {
+  padding: 10px;
+  border-radius: 4px;
+  color: #ffffff;
+}
+.messages .success {
+  background: #acd298;
+  -webkit-box-shadow: 0px 1px 1px #73b351;
+  -moz-box-shadow: 0px 1px 1px #73b351;
+  box-shadow: 0px 1px 1px #73b351;
+}
+.messages .error {
+  background: #ed464c;
+  -webkit-box-shadow: 0px 1px 1px #bb1218;
+  -moz-box-shadow: 0px 1px 1px #bb1218;
+  box-shadow: 0px 1px 1px #bb1218;
+}
+.messages .warning {
+  background: #fff170;
+  -webkit-box-shadow: 0px 1px 1px #ffe70a;
+  -moz-box-shadow: 0px 1px 1px #ffe70a;
+  box-shadow: 0px 1px 1px #ffe70a;
+}
+.messages .info,
+.messages .debug {
+  background: #2f96b4;
+  -webkit-box-shadow: 0px 1px 1px #1a5363;
+  -moz-box-shadow: 0px 1px 1px #1a5363;
+  box-shadow: 0px 1px 1px #1a5363;
 }
 #page-tree {
   padding: 0;
@@ -1588,6 +1666,9 @@ header {
 #page-tree li a:hover {
   background: #f2f2f2;
 }
+#page-tree li a:hover > .delete {
+  visibility: visible;
+}
 #page-tree li ul li a:before {
   content: '';
   position: absolute;
@@ -1598,43 +1679,85 @@ header {
   border-bottom: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
 }
-form label {
+#page-tree .icon {
   display: inline-block;
-  width: 20%;
+  color: #cccccc;
+  font-size: 20px;
 }
-form input[type="text"],
-form input[type="number"],
-form textarea {
+#page-tree .icon:hover {
+  color: #333333;
+}
+#page-tree .delete {
+  float: right;
+  visibility: hidden;
+}
+#page-tree .add {
+  margin-right: 10px;
+}
+form input {
+  font-family: "helvetica neue";
+}
+form input,
+form textarea,
+form select {
+  width: 100%;
   border: 1px solid #eaeaea;
   padding: 15px 10px 15px 10px;
   border-radius: 4px;
   background: #fdfdfd;
+  -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+
+  color: #888888;
 }
-form input[type="text"]:focus,
-form input[type="number"]:focus,
-form textarea:focus {
+form input:focus,
+form textarea:focus,
+form select:focus {
   outline: none;
   background: #ffffff;
   border: 1px solid #42b1ff;
+  color: #000000;
 }
-form input[type="text"],
-form textarea {
-  width: 70%;
+form input[type="date"],
+form select {
+  padding: 10px;
 }
 form input[type="submit"] {
   border: none;
   padding: 15px 25px 15px 25px;
   background: #2f96b4;
   color: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 1px 1px #1a5363;
+  -moz-box-shadow: 0px 1px 1px #1a5363;
   box-shadow: 0px 1px 1px #1a5363;
 }
 form input[type="submit"]:hover {
-  background: #6fc2da;
+  background: #47b0cf;
 }
 form input[type="submit"]:active {
   box-shadow: 0px 1px 1px #000000;
-  background: #1a5363;
+  background: #24748c;
 }
-form .field-row {
+form .errorlist {
+  border-radius: 4px;
+  color: #fff;
+  background: #ed464c;
+  list-style-type: none;
+  padding: 10px;
+}
+.field-row {
   margin: 20px 0px 20px 0px;
+}
+.field-row label {
+  color: #666;
+  display: block;
+  line-height: 200%;
 }
