@@ -6,12 +6,11 @@
  * @constructor
  */
 var Message = function(text,level) {
-    this.level = (typeof level === 'undefined') ? 'debug' : level;
-    this.text = (typeof text === 'undefined') ? 'Geen melding' : text;
-    this.fire = function(){
-
-        $('.messages').html('<li class="' + this.level + '">' + this.text + '</li>');
-
+    var _this = this;
+    _this.level = (typeof level === 'undefined') ? 'debug' : level;
+    _this.text = (typeof text === 'undefined') ? 'Geen melding' : text;
+    _this.fire = function(){
+        $('.messages').html('<li class="' + _this.level + '">' + _this.text + '</li>');
         setTimeout(function(){
             $('.messages li').fadeOut('slow');
         },2000);
@@ -25,22 +24,21 @@ var Message = function(text,level) {
  * @constructor
  */
 var Page = function(id){
-    this.id = id;
-    this.delete = function() {
+    var _this = this;
+    _this.id = id;
+    _this.delete = function() {
         $.ajax({
             type: "GET",
-            url: "/admin/delete/" + this.id
+            url: "/admin/delete/" + _this.id
         }).done(function(msg) {
             if(msg === "1"){
-
-                // Delete list item from the page tree
-                $('#' + this.id).fadeOut('slow',function(){
-                    $(this).remove();
-                });
 
                 // Fire a success message
                 var message = new Message('Pagina verwijderd','success');
                 message.fire();
+
+                // Delete list item from the page tree
+                _this.removeFromPageTree()
             }
             else{
                 // Fire an error message
@@ -49,10 +47,10 @@ var Page = function(id){
             }
         });
     }
-    this.publish = function() {
+    _this.publish = function() {
         $.ajax({
             type: "GET",
-            url: "/admin/publish/" + this.id
+            url: "/admin/publish/" + _this.id
         }).done(function(msg) {
             if(msg === "1"){
 
@@ -67,10 +65,10 @@ var Page = function(id){
             }
         });
     }
-    this.unpublish = function() {
+    _this.unpublish = function() {
         $.ajax({
             type: "GET",
-            url: "/admin/unpublish/" + this.id
+            url: "/admin/unpublish/" + _this.id
         }).done(function(msg) {
             if(msg === "1"){
 
@@ -85,22 +83,10 @@ var Page = function(id){
             }
         });
     }
-}
-
-/**
- * Delete a page
- *
- * @param id
- */
-function deletePage(id){
-
-    // Is the user sure of is action?
-    var confirm = window.confirm('Ben u zeker dat deze pagina wilt verwijderen?');
-
-    // Delete if confirmed
-    if (confirm === true){
-
-
+    _this.removeFromPageTree = function() {
+        $('#page-tree #' + _this.id).closest('li').fadeOut('slow',function(){
+            $(this).remove();
+        });
     }
 }
 
@@ -109,11 +95,12 @@ function deletePage(id){
  */
 $('document').ready(function(){
 
-    // Get the page Id
-    var pageId = $('form').attr('id');
 
     // Delete
-    $('.delete').click(function(){
+    $('#page-tree .delete').click(function(){
+
+        // Get the pageId
+        var pageId = $(this).closest('li').attr('id');
 
         // Is the user sure of is action?
         var confirm = window.confirm('Ben u zeker dat deze pagina wilt verwijderen?');
@@ -131,6 +118,8 @@ $('document').ready(function(){
     // Publish
     $('.publish-button').click(function(){
 
+        // Get the page Id
+        var pageId = $(this).closest('form').attr('id');
         var page = new Page(pageId);
 
         if($(this).hasClass('published')){

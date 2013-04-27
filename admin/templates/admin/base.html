@@ -22,7 +22,15 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="{{ STATIC_URL }}admin/js/script.js"></script>
 
-        <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <!-- Generic page styles -->
+        <link rel="stylesheet" href="{{ STATIC_URL }}admin/css/style.css">
+        <!-- Bootstrap styles for responsive website layout, supporting different screen sizes -->
+        <link rel="stylesheet" href="{{ STATIC_URL }}admin/css/bootstrap-responsive.min.css">
+        <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+        <link rel="stylesheet" href="{{ STATIC_URL }}admin/css/bootstrap-image-gallery.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}admin/css/jquery.fileupload-ui.css">
+        <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+        <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
     </head>
 
@@ -30,64 +38,61 @@
 
         <header>
             <div class="container">
-                <h1>Admin</h1>
+                <div class="row-fluid">
+                    <div class="span10">
+                        <ul id="options">
+                            <li>
+                                <a href="/admin" title="Admin home" class="button button-black">
+                                    <span class="icon delete">H</span>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/media" title="Media" class="button button-black">
+                                    <span class="icon delete">P</span>
+                                    Media
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/settings" title="Settings" class="button button-black">
+                                    <span class="icon delete">y</span>
+                                    Instellingen
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="span2">
+                        <ul id="logout">
+                            <li>
+                                <a href="/admin/logout" title="Logout" class="button button-red">
+                                    <span class="icon delete">Q</span>
+                                    Afmelden
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </header>
 
         {# Content goes here #}
         <div id="content" class="container">
 
+            {# Messages #}
             <div class="row-fluid">
+                <ul class="messages">
+                {% if messages %}
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                {% endif %}
+                </ul>
+            </div>
 
-                {# Recursive menu #}
-                <div class="span3">
-                    <h2>Pagina's</h2>
-                    <ul id="page-tree">
-                        {% for page in root_pages %}
-                            {% for branch, obj in page.as_tree %}
-                                {% if obj %}
-                                    <li id="{{ obj.id }}">
-                                        <a href="/admin/edit/{{ obj.id }}">{{ obj.title }}
-                                            <span class="icon delete">*</span>
-                                        </a>
-                                        {% if branch %}
-                                            <ul>
-                                                {% else %}
-                                            </li>
-                                        {% endif %}
-                                {% else %}
-                                    {% if branch %}
-                                        </ul>
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                        <li>
-                            <a href="/admin/new" title="Pagina toevoegen">
-                                <span class="icon add">&</span>
-                                Pagina toevoegen
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                {# Right Column #}
-                <div class="span9">
-
-                    {# Messages #}
-                    <ul class="messages">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                        {% endfor %}
-                    {% endif %}
-                    </ul>
-
-                    {# Content #}
-                    {% block content %}
-                    {% endblock content %}
-                </div>
-
+            {# Content #}
+            <div class="row-fluid">
+                {% block content %}
+                {% endblock content %}
             </div>
 
         </div>

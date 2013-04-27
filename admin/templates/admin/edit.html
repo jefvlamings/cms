@@ -37,9 +37,9 @@
             <div class="span3">
 
                 <div class="field-row">
-                    <a href="test" class="publish-button
+                    <a href="test" class="button button-green
                         {% if page.published == 1 %}
-                            published">
+                            button-pressed">
                         <span class="icon delete">3</span>
                         Gepubliceerd
                     {% else %}
@@ -63,14 +63,12 @@
                 </div>
 
                 <div class="field-row">
-                    {{ form.date_published.errors }}
-                    <label for="id_date_published">Laatst bewerkt</label>
-                    {{ form.date_published }}
+                    {{ form.date_modified.errors }}
+                    <label for="id_date_modified">Laatst bewerkt</label>
+                    {{ form.date_modified }}
                 </div>
 
-
-
-                <input type="submit" value="Opslaan" />
+                <input type="submit" value="Opslaan" class="button button-blue" />
 
             </div>
 

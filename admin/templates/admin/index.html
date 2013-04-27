@@ -7,7 +7,15 @@
 {# Content #}
 {% block content %}
 
-    <h2>Index</h2>
-    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+    {# Page Tree #}
+    <div class="span3">
+        {% include "admin/page_tree.html" %}
+    </div>
+
+    {# Dashboard #}
+    <div class="span9">
+        <h2>Dashboard</h2>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+    </div>
 
 {% endblock %}

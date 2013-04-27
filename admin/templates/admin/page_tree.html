@@ -1,0 +1,29 @@
+{# Recursive menu #}
+<h2>Pagina's</h2>
+<ul id="page-tree">
+    {% for page in root_pages %}
+        {% for branch, obj in page.as_tree %}
+            {% if obj %}
+                <li id="{{ obj.id }}">
+                    <a href="/admin/edit/{{ obj.id }}">{{ obj.title }}
+                        <span class="icon delete">*</span>
+                    </a>
+                    {% if branch %}
+                        <ul>
+                            {% else %}
+                        </li>
+                    {% endif %}
+            {% else %}
+                {% if branch %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    <li>
+        <a href="/admin/new" title="Pagina toevoegen">
+            <span class="icon add">&</span>
+            Pagina toevoegen
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,75 @@
+{% extends "admin/base.html" %}
+{% load upload_tags %}
+{% load thumbnail %}
+
+{% block content %}
+<div id="media" class="span12">
+
+    {# Form #}
+    <form id="fileupload" method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {# Dropzone #}
+        <input type="file" name="file" class="multiple-upload" multiple>
+
+        {# Buttons #}
+        <div class="button-row">
+            <button type="submit" class="button button-green start"><span class="icon">3</span>Uploaden</button>
+            <button type="reset" class="button button-red cancel"><span class="icon">6</span>Annuleer</button>
+            <button type="button" class="button delete"><span class="icon">1</span>Opnieuw</button>
+        </div>
+
+        <div class="fileupload-progress">
+            <div class="progress progress-success progres-striped active">
+                <div class="bar" style="width:0%"></div>
+            </div>
+            <div class="progress-extended">&nbsp;</div>
+        </div>
+
+        <div class="fileupload-loading"></div>
+        <table class="table table-striped">
+            <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+        </table>
+    </form>
+
+    <div class="fileupload-content">
+        <table class="files"></table>
+        <div class="fileupload-progressbar"></div>
+    </div>
+
+    <div class="media-items">
+        {% if files %}
+            <h2>Already uploaded</h2>
+            {% for file in files %}
+            <div class="media-item" data-file-id="{{ file.id }}">
+
+                {% thumbnail file.file "200x200" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                {% empty %}
+                    <p>No image</p>
+                {% endthumbnail %}
+
+                {{ file.title|truncatechars:30  }}
+
+                <a class="button button-red delete" href=""><span class="icon">#</span></a>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% upload_js %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+<script src="{{ STATIC_URL }}js/tmpl.min.js"></script>
+<script src="{{ STATIC_URL }}js/load-image.js"></script>
+<script src="{{ STATIC_URL }}js/canvas-to-blob.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.iframe-transport.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.fileupload.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.fileupload-fp.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.fileupload-ui.js"></script>
+<script src="{{ STATIC_URL }}js/locale.js"></script>
+<script src="{{ STATIC_URL }}js/main.js"></script>
+<script src="{{ STATIC_URL }}js/csrf.js"></script>
+{% endblock %}
