@@ -11,7 +11,11 @@ var MediaItem = function(id) {
     _this.delete = function() {
         var request = $.ajax({
             url: '/admin/media/delete/' + id,
-            type: "POST"
+            type: "POST",
+            crossDomain: false,
+            beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", _this.csrfToken);
+            }
         });
         request.done(function() {
             new Message('Bestand verwijderd','success').fire();
@@ -30,6 +34,8 @@ var MediaItem = function(id) {
 
     /* -- PROPERTIES -- */
     _this.box = $('.media-item[data-file-id="' + id + '"]');
+    _this.form = $('#fileupload');
+    _this.csrfToken = _this.form.find('input[name=csrfmiddlewaretoken]').val();
 }
 
 /**
@@ -41,11 +47,9 @@ $(document).ready(function() {
     $('#fileupload').fileupload();
 
     $('.media-item .delete').click(function() {
-
-        var id = $(this).parent().attr('data-file-id');
+        var id = $(this).closest('.media-item').attr('data-file-id');
         var mediaItem = new MediaItem(id)
         mediaItem.delete();
-
         return false;
     });
 

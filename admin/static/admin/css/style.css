@@ -1561,6 +1561,9 @@ textarea {
     overflow: visible !important;
   }
 }
+/**
+ * Icons
+ */
 @font-face {
   font-family: 'Pictos';
   src: url('pictos/pictos-web.eot');
@@ -1571,10 +1574,15 @@ textarea {
 .icon {
   font-family: 'pictos';
 }
+/**
+ * Buttons
+ */
 .button {
   display: block;
   padding: 8px 20px 6px 20px;
   border: 1px solid transparent;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
   border-radius: 4px;
   text-align: center;
   text-decoration: none;
@@ -1590,9 +1598,11 @@ textarea {
 }
 .button .icon {
   font-size: 20px;
-  display: inline-block;
   vertical-align: middle;
-  margin: 0px 10px 0px 0px;
+}
+.button span {
+  margin: 0px 5px;
+  display: inline-block;
 }
 .button-black {
   color: #fff;
@@ -1656,6 +1666,9 @@ textarea {
 .button-pressed:active {
   background: #f0f0f0;
 }
+/**
+ * Wrappers
+ */
 html {
   font-family: "helvetica neue";
   background: #fafafa;
@@ -1664,27 +1677,59 @@ body {
   margin: 0;
   padding-bottom: 40px;
 }
+/**
+ * Header
+ */
 header {
+  *zoom: 1;
+  position: fixed;
+  width: 100%;
   background: #444;
   border-bottom: 2px solid #fff;
   color: #ffffff;
+  padding: 10px;
+}
+header:before,
+header:after {
+  content: " ";
+  display: table;
+}
+header:after {
+  clear: both;
 }
 header ul {
-  display: inline-block;
+  float: left;
   padding: 0;
+  margin: 0;
 }
 header ul li {
   display: inline-block;
 }
 header #logout {
-  text-align: right;
+  float: right;
 }
+/**
+ * Content
+ */
+#content {
+  padding-top: 80px;
+}
+/**
+ * Messages
+ */
 .messages {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 10;
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 .messages li {
   padding: 10px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
   border-radius: 4px;
   color: #ffffff;
 }
@@ -1713,6 +1758,9 @@ header #logout {
   -moz-box-shadow: 0px 1px 1px #1a5363;
   box-shadow: 0px 1px 1px #1a5363;
 }
+/**
+ * Page Tree
+ */
 #page-tree {
   padding: 0;
 }
@@ -1757,6 +1805,9 @@ header #logout {
 #page-tree .add {
   margin-right: 10px;
 }
+/**
+ * Forms
+ */
 form input {
   font-family: "helvetica neue";
 }
@@ -1765,6 +1816,8 @@ form textarea,
 form select {
   border: 1px solid #eaeaea;
   padding: 15px 10px 15px 10px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
   border-radius: 4px;
   background: #fdfdfd;
   color: #888888;
@@ -1803,6 +1856,8 @@ form input[type="submit"] {
   padding: 14px 20px 14px 20px;
 }
 form .errorlist {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
   border-radius: 4px;
   color: #fff;
   background: #ed464c;
@@ -1825,32 +1880,9 @@ label {
   display: block;
   line-height: 200%;
 }
-.multiple-upload {
-  margin: 10px 0px;
-  width: 100%;
-  height: 150px;
-  display: block;
-  -webkit-appearance: none;
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-
-  box-sizing: border-box;
-  /* Opera/IE 8+ */
-
-  border: 5px dashed #ccc;
-  color: transparent;
-}
-.multiple-upload:hover {
-  background: #fff;
-  border: 5px dashed #999;
-  cursor: pointer;
-}
-.multiple-upload::-webkit-file-upload-button {
-  display: none;
-}
+/**
+ * Media
+ */
 #media form {
   display: block;
   *zoom: 1;
@@ -1871,6 +1903,31 @@ label {
   display: inline-block;
   margin: 0px 0px 10px 10px;
 }
+#media .button-row .multiple-upload {
+  display: inline-block;
+  -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+
+  padding: 9px;
+  margin: 2px 0px 10px 10px;
+  cursor: pointer;
+}
+#media .button-row .multiple-upload:before {
+  content: 'Kies bestanden';
+}
+#media .button-row .multiple-upload:hover {
+  background: #fff;
+}
+#media .button-row .multiple-upload::-webkit-file-upload-button {
+  display: none;
+}
 #media .media-items {
   display: block;
   font-size: 0px;
@@ -1883,10 +1940,23 @@ label {
   margin-left: 2%;
   margin-bottom: 20px;
   background: #fff;
+  -webkit-box-shadow: 0px 1px 1px #eeeeee;
+  -moz-box-shadow: 0px 1px 1px #eeeeee;
+  box-shadow: 0px 1px 1px #eeeeee;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
   font-size: 16px;
 }
 #media .media-item img {
   width: 100%;
+}
+#media .media-item .actions {
+  text-align: center;
+  padding: 10px;
+}
+#media .media-item .actions .button {
+  display: inline-block;
 }
 #media table {
   width: 100%;

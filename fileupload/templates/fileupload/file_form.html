@@ -9,14 +9,21 @@
     <form id="fileupload" method="post" action="." enctype="multipart/form-data">
         {% csrf_token %}
 
-        {# Dropzone #}
-        <input type="file" name="file" class="multiple-upload" multiple>
-
         {# Buttons #}
         <div class="button-row">
-            <button type="submit" class="button button-green start"><span class="icon">3</span>Uploaden</button>
-            <button type="reset" class="button button-red cancel"><span class="icon">6</span>Annuleer</button>
-            <button type="button" class="button delete"><span class="icon">1</span>Opnieuw</button>
+            <input type="file" name="file" class="multiple-upload" multiple>
+            <button type="submit" class="button button-green start">
+                <span class="icon">{</span>
+                <span>Uploaden</span>
+            </button>
+            <button type="reset" class="button button-red cancel">
+                <span class="icon">6</span>
+                <span>Annuleer</span>
+            </button>
+            <button type="button" class="button delete">
+                <span class="icon">1</span>
+                <span>Opnieuw</span>
+            </button>
         </div>
 
         <div class="fileupload-progress">
@@ -49,9 +56,10 @@
                     <p>No image</p>
                 {% endthumbnail %}
 
-                {{ file.title|truncatechars:30  }}
-
-                <a class="button button-red delete" href=""><span class="icon">#</span></a>
+                <div class="actions">
+                    <a class="button view" href="{{ file.file.url }}"><span class="icon">`</span></a>
+                    <a class="button button-red delete" href=""><span class="icon">#</span></a>
+                </div>
             </div>
             {% endfor %}
         {% endif %}
@@ -60,7 +68,6 @@
 
 {% upload_js %}
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
 <script src="{{ STATIC_URL }}js/tmpl.min.js"></script>
 <script src="{{ STATIC_URL }}js/load-image.js"></script>

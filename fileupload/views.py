@@ -39,10 +39,6 @@ class FileDeleteView(DeleteView):
     model = File
 
     def delete(self, request, *args, **kwargs):
-        """
-        This does not actually delete the file, only the database record.  But
-        that is easy to implement.
-        """
         self.object = self.get_object()
         self.object.delete()
         if request.is_ajax():
@@ -50,7 +46,7 @@ class FileDeleteView(DeleteView):
             response['Content-Disposition'] = 'inline; filename=files.json'
             return response
         else:
-            return HttpResponseRedirect('/admin/media/new/')
+            return HttpResponseRedirect('/admin/media/')
 
 class JSONResponse(HttpResponse):
     """JSON response class."""

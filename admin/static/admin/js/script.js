@@ -95,6 +95,19 @@ var Page = function(id){
  */
 $('document').ready(function(){
 
+    // Fancybox
+    $('.view').click(function() {
+        var imageUrl = $(this).attr('href');
+         $.fancybox.open([
+            {
+                href : imageUrl,
+                title : '1st title'
+            }
+        ], {
+            padding : 0
+        });
+        return false;
+    })
 
     // Delete
     $('#page-tree .delete').click(function(){
