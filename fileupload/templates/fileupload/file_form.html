@@ -13,16 +13,16 @@
         <div class="button-row">
             <input type="file" name="file" class="multiple-upload" multiple>
             <button type="submit" class="button button-green start">
-                <span class="icon">{</span>
-                <span>Uploaden</span>
+                <span class="icon icon-upload"></span>
+                Uploaden
             </button>
             <button type="reset" class="button button-red cancel">
-                <span class="icon">6</span>
-                <span>Annuleer</span>
+                <span class="icon icon-stop"></span>
+                Annuleer
             </button>
             <button type="button" class="button delete">
-                <span class="icon">1</span>
-                <span>Opnieuw</span>
+                <span class="icon icon-refresh"></span>
+                Opnieuw
             </button>
         </div>
 
@@ -57,8 +57,12 @@
                 {% endthumbnail %}
 
                 <div class="actions">
-                    <a class="button view" href="{{ file.file.url }}"><span class="icon">`</span></a>
-                    <a class="button button-red delete" href=""><span class="icon">#</span></a>
+                    <a class="button button-black view" href="{{ file.file.url }}">
+                        <span class="icon icon-magnify"></span>
+                    </a>
+                    <a class="button button-red delete" href="">
+                        <span class="icon icon-delete"></span>
+                    </a>
                 </div>
             </div>
             {% endfor %}

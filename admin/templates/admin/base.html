@@ -29,55 +29,78 @@
     <body lang="en">
 
         {# Messages #}
-        <div class="row-fluid">
-            <ul class="messages">
-            {% if messages %}
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        <ul class="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+        </ul>
+
+        <header>
+            <ul id="options">
+                <li>
+                    <a href="/admin" title="Dashboard" class="button button-black">
+                        <span class="icon icon-home"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/media/" title="Media" class="button button-black">
+                        <span class="icon icon-pictures"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="Page tree" id="toggle-page-tree" class="button button-black">
+                        <span class="icon icon-list"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/settings/" title="Settings" class="button button-black">
+                        <span class="icon icon-settings"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/logout/" id="logout" title="Logout" class="button button-red">
+                        <span class="icon icon-power"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </header>
+
+        {# Recursive menu #}
+        <div id="page-menu">
+            <ul id="page-tree">
+                {% for page in root_pages %}
+                    {% for branch, obj in page.as_tree %}
+                        {% if obj %}
+                            <li id="{{ obj.id }}">
+                                <a href="/admin/edit/{{ obj.id }}">{{ obj.title }}
+                                    <span class="icon icon-remove delete"></span>
+                                </a>
+                                {% if branch %}
+                                    <ul>
+                                        {% else %}
+                                    </li>
+                                {% endif %}
+                        {% else %}
+                            {% if branch %}
+                                </ul>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
-            {% endif %}
+                <li>
+                    <a href="/admin/new" title="Pagina toevoegen">
+                        <span class="icon icon-add add"></span>
+                        Pagina toevoegen
+                    </a>
+                </li>
             </ul>
         </div>
 
-        <header>
-            <div class="container">
-                <div class="row-fluid">
-                    <div class="span12">
-                        <ul id="options">
-                            <li>
-                                <a href="/admin" title="Admin home" class="button button-black">
-                                    <span class="icon delete">H</span>
-                                    <span>Home</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/admin/media/" title="Media" class="button button-black">
-                                    <span class="icon delete">P</span>
-                                    <span>Media</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/admin/settings/" title="Settings" class="button button-black">
-                                    <span class="icon delete">y</span>
-                                    <span>Instellingen</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul id="logout">
-                            <li>
-                                <a href="/admin/logout/" id="logout" title="Logout" class="button button-red">
-                                    <span class="icon delete">Q</span>
-                                    <span>Afmelden</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
-
         {# Content goes here #}
-        <div id="content" class="container">
+        <div id="content">
 
             {# Content #}
             <div class="row-fluid">

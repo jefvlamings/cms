@@ -150,4 +150,25 @@ $('document').ready(function(){
         return false;
     });
 
+    // Slide page menu
+    $('#toggle-page-tree').click(function() {
+
+        if($(this).hasClass('button-pressed')) {
+            $('#page-menu').animate({
+                'left': '-230px'
+            },'fast');
+            $(this).removeClass('button-pressed');
+        }
+        else {
+            $('#page-menu').animate({
+                'left': '70px'
+            },'fast');
+            $(this).addClass('button-pressed');
+        }
+
+
+        // Disable the link
+        return false;
+    })
+
 });
