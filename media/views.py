@@ -1,10 +1,9 @@
-from fileupload.models import File
+from media.models import Media
 from django.views.generic import CreateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 import json
 
-from django.conf import settings
 
 def response_mimetype(request):
     if "application/json" in request.META['HTTP_ACCEPT']:
@@ -12,8 +11,9 @@ def response_mimetype(request):
     else:
         return "text/plain"
 
-class FileCreateView(CreateView):
-    model = File
+
+class MediaCreateView(CreateView):
+    model = Media
 
     def form_valid(self, form):
         self.object = form.save()
@@ -30,13 +30,13 @@ class FileCreateView(CreateView):
         return response
 
     def get_context_data(self, **kwargs):
-        context = super(FileCreateView, self).get_context_data(**kwargs)
-        context['files'] = File.objects.all()
+        context = super(MediaCreateView, self).get_context_data(**kwargs)
+        context['files'] = Media.objects.all()
         return context
 
 
-class FileDeleteView(DeleteView):
-    model = File
+class MediaDeleteView(DeleteView):
+    model = Media
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()

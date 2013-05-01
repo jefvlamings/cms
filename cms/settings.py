@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'admin',
     'pages',
-    'fileupload',
+    'media',
     'sorl.thumbnail',
 )
 
