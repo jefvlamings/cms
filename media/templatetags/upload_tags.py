@@ -19,13 +19,13 @@ def upload_js():
                 <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
             </td>
             <td class="start">{% if (!o.options.autoUpload) { %}
-                <button class="button button-green"><span class="icon">4</span></button>
+                <button class="button button-green"><span class="icon icon-play"></span></button>
             {% } %}</td>
         {% } else { %}
             <td colspan="2"></td>
         {% } %}
         <td class="cancel">{% if (!i) { %}
-            <button class="button button-red"><span class="icon">6</span></button>
+            <button class="button"><span class="icon icon-remove"></span></button>
         {% } %}</td>
     </tr>
 {% } %}

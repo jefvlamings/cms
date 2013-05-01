@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
 
+
+# Media
 class Media(models.Model):
 
     file = models.FileField(upload_to="media")
@@ -9,10 +11,6 @@ class Media(models.Model):
 
     def __unicode__(self):
         return self.file.name
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('upload-new')
 
     def save(self, *args, **kwargs):
         self.date_added = datetime.now()

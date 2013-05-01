@@ -1,13 +1,13 @@
 from django.conf.urls import patterns, url
-from pages import views
+from pages.views import PagesIndexView, PagesDetailView
 
 # Routing
 urlpatterns = patterns('',
 
     # Any string should redirect to 'detail'
-    url(r'(?P<path>.+)$', views.detail, name='detail'),
+    url(r'(?P<path>.+)$', PagesDetailView.as_view()),
 
     # An empty string ^$ should redirect to 'index'
-    url(r'^$', views.index, name='index'),
+    url(r'^$', PagesIndexView.as_view()),
 
 )

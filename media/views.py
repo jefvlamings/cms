@@ -12,8 +12,10 @@ def response_mimetype(request):
         return "text/plain"
 
 
+# Create
 class MediaCreateView(CreateView):
     model = Media
+    template_name = "media/index.html"
 
     def form_valid(self, form):
         self.object = form.save()
@@ -22,7 +24,7 @@ class MediaCreateView(CreateView):
             'name': f.name,
             'url': f.name.replace(" ", "_"),
             'thumbnail_url': f.name.replace(" ", "_"),
-            'delete_url': reverse('upload-delete', args=[self.object.id]),
+            'delete_url': 'admin/media/delete/' + str(self.object.pk),
             'delete_type': "DELETE"
         }]
         response = JSONResponse(data, {}, response_mimetype(self.request))
@@ -35,6 +37,7 @@ class MediaCreateView(CreateView):
         return context
 
 
+# Delete
 class MediaDeleteView(DeleteView):
     model = Media
 
@@ -48,8 +51,9 @@ class MediaDeleteView(DeleteView):
         else:
             return HttpResponseRedirect('/admin/media/')
 
+
+# JSON response
 class JSONResponse(HttpResponse):
-    """JSON response class."""
-    def __init__(self,obj='',json_opts={},mimetype="application/json",*args,**kwargs):
-        content = json.dumps(obj,**json_opts)
-        super(JSONResponse,self).__init__(content,mimetype,*args,**kwargs)
+    def __init__(self, obj='', json_opts={}, mimetype="application/json", *args, **kwargs):
+        content = json.dumps(obj, **json_opts)
+        super(JSONResponse,self).__init__(content, mimetype, *args, **kwargs)

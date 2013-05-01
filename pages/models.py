@@ -1,5 +1,5 @@
 from django.db import models
-from django.forms import ModelForm, DateInput, Textarea, TextInput, CheckboxInput
+from django.forms import ModelForm, DateInput, Textarea, TextInput
 from datetime import datetime
 
 
@@ -49,6 +49,7 @@ class PageForm(ModelForm):
             'date_added': DateInput(attrs={'type': 'date'}),
             'date_modified': DateInput(attrs={'type': 'date'}),
         }
+
     def __init__(self, *args, **kwargs):
         super(PageForm, self).__init__(*args, **kwargs)
         self.fields['date_added'].widget.format = '%Y-%m-%d'

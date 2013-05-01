@@ -7,10 +7,8 @@
 {# Content #}
 {% block content %}
 
-    <h2>Bewerk</h2>
-
-    {% if page.id %}
-    <form id="{{ page.id }}" action="/admin/edit/{{ page.id }}" method="post">
+    {% if page.pk %}
+    <form id="page-form" data-id="{{ page.pk }}" action="/admin/edit/{{ page.pk }}" method="post">
     {% else %}
     <form action="/admin/new" method="post">
     {% endif %}
@@ -37,17 +35,17 @@
             <div class="span3">
 
                 <div class="field-row">
-                    <a href="test" class="button button-green
-                        {% if page.published == 1 %}
-                            button-pressed">
-                        <span class="icon delete">3</span>
-                        Gepubliceerd
+                    {% if page.published == 1 %}
+                        <a href="test" class="publish-button button button-green button-pressed">
+                            <span class="icon icon-eye"></span>
+                            Gepubliceerd
+                        </a>
                     {% else %}
-                        ">
-                        <span class="icon delete">E</span>
-                        Publiceer
+                        <a href="test" class="publish-button button button-green">
+                            <span class="icon icon-eye"></span>
+                            Publiceer
+                        </a>
                     {% endif %}
-                    </a>
                 </div>
 
                 <div class="field-row">
@@ -75,5 +73,7 @@
         </div>
 
     </form>
+
+    <script src="{{ STATIC_URL }}js/page.js"></script>
 
 {% endblock %}
